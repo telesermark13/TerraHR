@@ -21,9 +21,8 @@ class ProfileController extends SuperController {
   late final userInfo = Rxn<UserDetails>();
   late final personalInfo = Rxn<PersonalDetail>();
   late final familyInfo = Rxn<FamilyDetail>();
-  late final  bankInfo = Rxn<BankDetail>();
-  late final  profileImage = Rxn<String>();
-
+  late final bankInfo = Rxn<BankDetail>();
+  late final profileImage = Rxn<String>();
 
   //personal details controllers
   var emailController = TextEditingController(text: "");
@@ -58,13 +57,11 @@ class ProfileController extends SuperController {
   var pancardController = TextEditingController(text: "");
   var aadharcardController = TextEditingController(text: "");
 
-
-
   late List<TextEditingController> editControllers;
-  late TextEditingController dobEditController= TextEditingController();
-  final  genderEditController= "N/A".obs;
-  final  bloogEditController= "N/A".obs;
-  final  addressTypeEditController= "N/A".obs;
+  late TextEditingController dobEditController = TextEditingController();
+  final genderEditController = "N/A".obs;
+  final bloogEditController = "N/A".obs;
+  final addressTypeEditController = "N/A".obs;
   static Map professionalBlockEditItems = {
     'Experience': '',
     'Skills': '',
@@ -80,7 +77,8 @@ class ProfileController extends SuperController {
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
-      dobEditController.text = "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+      dobEditController.text =
+          "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
     }
   }
 
@@ -91,7 +89,6 @@ class ProfileController extends SuperController {
     'Blood Group': '',
   };
 
-
   static Map personalBlockEditItems = {
     'Bio': '',
     'Address1': '',
@@ -101,8 +98,6 @@ class ProfileController extends SuperController {
     'State': '',
     'Country': '',
   };
-
-
 
   static Map familyBlockEditItems = {
     'Father Name': '',
@@ -128,73 +123,94 @@ class ProfileController extends SuperController {
   static const int familyUpdate = 3;
   static const int bankUpdate = 4;
 
-
   Map getProfessionalEditItems() {
-    professionalBlockEditItems.update("Experience", (value) => professional.value?.experience??"");
-    professionalBlockEditItems.update("Skills", (value) => professional.value?.skills??"");
+    professionalBlockEditItems.update(
+        "Experience", (value) => professional.value?.experience ?? "");
+    professionalBlockEditItems.update(
+        "Skills", (value) => professional.value?.skills ?? "");
     return professionalBlockEditItems;
   }
 
-
   Map getPersonalEditItems() {
-    personalBlockEditItems.update("Bio", (value) => personalInfo.value?.bio??"");
-    personalBlockEditItems.update("Address1", (value) => personalInfo.value?.address??"");
-    personalBlockEditItems.update("Address2", (value) => personalInfo.value?.address2??"");
-    personalBlockEditItems.update("Zipcode", (value) => personalInfo.value?.zipcode??"");
-    personalBlockEditItems.update("City", (value) => personalInfo.value?.city??"");
-    personalBlockEditItems.update("State", (value) => personalInfo.value?.state??"");
-    personalBlockEditItems.update("Country", (value) => personalInfo.value?.country??"");
+    personalBlockEditItems.update(
+        "Bio", (value) => personalInfo.value?.bio ?? "");
+    personalBlockEditItems.update(
+        "Address1", (value) => personalInfo.value?.address ?? "");
+    personalBlockEditItems.update(
+        "Address2", (value) => personalInfo.value?.address2 ?? "");
+    personalBlockEditItems.update(
+        "Zipcode", (value) => personalInfo.value?.zipcode ?? "");
+    personalBlockEditItems.update(
+        "City", (value) => personalInfo.value?.city ?? "");
+    personalBlockEditItems.update(
+        "State", (value) => personalInfo.value?.state ?? "");
+    personalBlockEditItems.update(
+        "Country", (value) => personalInfo.value?.country ?? "");
     return personalBlockEditItems;
   }
 
   Map getExtrasEditItems() {
-    dobEditController.text = personalInfo.value?.dob??"";
-    addressTypeEditController.value = personalInfo.value?.addresstype??"N/A";
+    dobEditController.text = personalInfo.value?.dob ?? "";
+    addressTypeEditController.value = personalInfo.value?.addresstype ?? "N/A";
     bloogEditController.value = "N/A";
     genderEditController.value = personalInfo.value?.gender == "ML"
         ? "Male"
         : personalInfo.value?.gender == "FL"
-        ? "Female"
-        : "N/A";
-    extraWidgetsPersonal.update("Date of birth", (value) => personalInfo.value?.dob??"");
-    extraWidgetsPersonal.update("Address Type", (value) => personalInfo.value?.addresstype??"N/A");
+            ? "Female"
+            : "N/A";
+    extraWidgetsPersonal.update(
+        "Date of birth", (value) => personalInfo.value?.dob ?? "");
+    extraWidgetsPersonal.update(
+        "Address Type", (value) => personalInfo.value?.addresstype ?? "N/A");
     extraWidgetsPersonal.update("Blood Group", (value) => "N/A");
-    extraWidgetsPersonal.update("Gender", (value) => personalInfo.value?.gender == "ML"
-        ? "Male"
-        : personalInfo.value?.gender == "FL"
-        ? "Female"
-        : "N/A");
+    extraWidgetsPersonal.update(
+        "Gender",
+        (value) => personalInfo.value?.gender == "ML"
+            ? "Male"
+            : personalInfo.value?.gender == "FL"
+                ? "Female"
+                : "N/A");
     return extraWidgetsPersonal;
   }
 
-
   Map getFamilyEditItems() {
-    familyBlockEditItems.update("Father Name", (value) => familyInfo.value?.fathername??"");
-    familyBlockEditItems.update("Mother Name", (value) => familyInfo.value?.mothername??"");
-    familyBlockEditItems.update("Personal Email", (value) => familyInfo.value?.personalemail??"");
-    familyBlockEditItems.update("Alternate Contact", (value) => familyInfo.value?.alternatecontact??"");
-    familyBlockEditItems.update("Family Address", (value) => familyInfo.value?.familyaddress??"");
+    familyBlockEditItems.update(
+        "Father Name", (value) => familyInfo.value?.fathername ?? "");
+    familyBlockEditItems.update(
+        "Mother Name", (value) => familyInfo.value?.mothername ?? "");
+    familyBlockEditItems.update(
+        "Personal Email", (value) => familyInfo.value?.personalemail ?? "");
+    familyBlockEditItems.update("Alternate Contact",
+        (value) => familyInfo.value?.alternatecontact ?? "");
+    familyBlockEditItems.update(
+        "Family Address", (value) => familyInfo.value?.familyaddress ?? "");
     return familyBlockEditItems;
   }
 
-
   Map getBankBlockEditItems() {
-    bankBlockEditItems.update("Bank Name", (value) => bankInfo.value?.bankname??"");
-    bankBlockEditItems.update("Account No.", (value) => bankInfo.value?.accountno??"");
-    bankBlockEditItems.update("IFSC Code", (value) => bankInfo.value?.ifsccode??"");
-    bankBlockEditItems.update("Branch Name", (value) => bankInfo.value?.branchname??"");
-    bankBlockEditItems.update("Name as per Bank", (value) => bankInfo.value?.bankaddress??"");
-    bankBlockEditItems.update("Pan No.", (value) => bankInfo.value?.pancard??"");
-    bankBlockEditItems.update("AADHAR No.", (value) => bankInfo.value?.aadharcard??"");
+    bankBlockEditItems.update(
+        "Bank Name", (value) => bankInfo.value?.bankname ?? "");
+    bankBlockEditItems.update(
+        "Account No.", (value) => bankInfo.value?.accountno ?? "");
+    bankBlockEditItems.update(
+        "IFSC Code", (value) => bankInfo.value?.ifsccode ?? "");
+    bankBlockEditItems.update(
+        "Branch Name", (value) => bankInfo.value?.branchname ?? "");
+    bankBlockEditItems.update(
+        "Name as per Bank", (value) => bankInfo.value?.bankaddress ?? "");
+    bankBlockEditItems.update(
+        "Pan No.", (value) => bankInfo.value?.pancard ?? "");
+    bankBlockEditItems.update(
+        "AADHAR No.", (value) => bankInfo.value?.aadharcard ?? "");
     return bankBlockEditItems;
   }
 
-  List getEditedData(){
+  List getEditedData() {
     List dataArray = List.empty(growable: true);
     for (var element in editControllers) {
       dataArray.add(element.text);
     }
-   return dataArray;
+    return dataArray;
   }
 
   void updatePersonalDetails() async {
@@ -202,14 +218,14 @@ class ProfileController extends SuperController {
     AppUtils.printMessage("Uploading Personal Data...");
     List dataArray = getEditedData();
     try {
-      Map<String,String> body = {
-        "userid": userInfo.value?.userid??"",
+      Map<String, String> body = {
+        "userid": userInfo.value?.userid ?? "",
         "gender": genderEditController.value == "Male"
             ? "ML"
             : genderEditController.value == "Female"
                 ? "FL"
                 : "N/A",
-        "mime_type" : personalInfo.value?.mimetype??"",
+        "mime_type": personalInfo.value?.mimetype ?? "",
         "bio": dataArray[0],
         "dob": dobEditController.text,
         "address": dataArray[1],
@@ -221,31 +237,33 @@ class ProfileController extends SuperController {
         "country": dataArray[6]
       };
 
-        await ProfileRepository().updateProfile(body,APIPath.kPostProfilePersonalData).then((value) {
-          closeScreen();
-
-        });
+      await ProfileRepository()
+          .updateProfile(body, APIPath.kPostProfilePersonalData)
+          .then((value) {
+        closeScreen();
+      });
     } catch (e) {
       return Future.error(e);
     }
   }
-
 
   void updateProfessionalDetails() async {
     DialogHelper.showLoading();
     AppUtils.printMessage("Uploading Professional Data...");
     List dataArray = getEditedData();
     try {
-      Map<String,String> body = {
-        "userid": userInfo.value?.userid??"",
-        "designation":professional.value?.designation??"",
-        "experience":dataArray[0],
-        "skills":  dataArray[1],
-        "joining_date":  professional.value?.joiningdate??"",
-        "termination_date":  professional.value?.terminationdate??"",
-        "termination_reason": professional.value?.terminationreason??""
+      Map<String, String> body = {
+        "userid": userInfo.value?.userid ?? "",
+        "designation": professional.value?.designation ?? "",
+        "experience": dataArray[0],
+        "skills": dataArray[1],
+        "joining_date": professional.value?.joiningdate ?? "",
+        "termination_date": professional.value?.terminationdate ?? "",
+        "termination_reason": professional.value?.terminationreason ?? ""
       };
-      await ProfileRepository().updateProfile(body,APIPath.kPostProfileProfessional).then((value) {
+      await ProfileRepository()
+          .updateProfile(body, APIPath.kPostProfileProfessional)
+          .then((value) {
         closeScreen();
       });
     } catch (e) {
@@ -258,15 +276,17 @@ class ProfileController extends SuperController {
     AppUtils.printMessage("Uploading Family Data...");
     List dataArray = getEditedData();
     try {
-      Map<String,String> body = {
-        "userid":  userInfo.value?.userid??"",
+      Map<String, String> body = {
+        "userid": userInfo.value?.userid ?? "",
         "father_name": dataArray[0],
         "mother_name": dataArray[1],
         "personal_email": dataArray[2],
         "alternate_contact": dataArray[3],
-        "family_address":dataArray[4]
+        "family_address": dataArray[4]
       };
-      await ProfileRepository().updateProfile(body,APIPath.kPostProfileFamily).then((value) {
+      await ProfileRepository()
+          .updateProfile(body, APIPath.kPostProfileFamily)
+          .then((value) {
         closeScreen();
       });
     } catch (e) {
@@ -279,17 +299,19 @@ class ProfileController extends SuperController {
     AppUtils.printMessage("Uploading Bank Data...");
     List dataArray = getEditedData();
     try {
-      Map<String,String> body = {
-        "userid": userInfo.value?.userid??"",
+      Map<String, String> body = {
+        "userid": userInfo.value?.userid ?? "",
         "bank_name": dataArray[0],
         "account_no": dataArray[1],
         "ifsc_code": dataArray[2],
         "pan_card": dataArray[5],
-        "branch_name":dataArray[3],
+        "branch_name": dataArray[3],
         "bank_address": dataArray[4],
         "aadhar_card": dataArray[6]
       };
-      await ProfileRepository().updateProfile(body,APIPath.kPostProfileBank).then((value) {
+      await ProfileRepository()
+          .updateProfile(body, APIPath.kPostProfileBank)
+          .then((value) {
         closeScreen();
       });
     } catch (e) {
@@ -316,17 +338,17 @@ class ProfileController extends SuperController {
         }
       case bankUpdate:
         {
-         updateBankDetails();
+          updateBankDetails();
           break;
         }
     }
   }
 
-  void closeScreen(){
+  void closeScreen() {
     DialogHelper.dismissLoader();
     Get.back();
     getUserData();
-}
+  }
 
   @override
   void onReady() {
@@ -364,15 +386,19 @@ class ProfileController extends SuperController {
         //userDetails(userDetailsModel);
         if (userDetailsModel.data?.isNotEmpty == true) {
           userInfo(userDetailsModel.data?[0]);
-          StorageUtils.instance.setFullName("${userDetailsModel.data?[0]?.firstname ?? "Unknown user"} ${userDetailsModel.data?[0]?.lastname??""}");
+          StorageUtils.instance.setFullName(
+              "${userDetailsModel.data?[0]?.firstname ?? "Unknown user"} ${userDetailsModel.data?[0]?.lastname ?? ""}");
         }
         if (userDetailsModel.professionalDetails?.isNotEmpty == true) {
           professional(userDetailsModel.professionalDetails?[0]);
-          StorageUtils.instance.setDesignation(userDetailsModel.professionalDetails?[0]?.designation??"Unknown profession");
+          StorageUtils.instance.setDesignation(
+              userDetailsModel.professionalDetails?[0]?.designation ??
+                  "Unknown profession");
         }
         if (userDetailsModel.personalDetails?.isNotEmpty == true) {
           personalInfo(userDetailsModel.personalDetails?[0]);
-          String path = APIPath.kProfilePicPrefix+(userDetailsModel.personalDetails?[0]?.src??"");
+          String path = APIPath.kProfilePicPrefix +
+              (userDetailsModel.personalDetails?[0]?.src ?? "");
           StorageUtils.instance.setProfilePic(path);
           profileImage(path);
         }
@@ -401,10 +427,11 @@ class ProfileController extends SuperController {
     phoneController.text = userInfo.value?.phonenumber ?? "phone unavailable";
     addressController.text =
         "${personalInfo.value?.address ?? ""}, ${personalInfo.value?.address2 ?? ""}\n${personalInfo.value?.city ?? ""}\n${personalInfo.value?.state ?? ""} - ${personalInfo.value?.zipcode ?? ""}";
-    addressTypeController.text = personalInfo.value?.addresstype ?? "unavailable";
+    addressTypeController.text =
+        personalInfo.value?.addresstype ?? "unavailable";
     dobController.text = personalInfo.value?.dob ?? "unavailable";
     bioController.text = personalInfo.value?.bio ?? "unavailable";
-    bloodController.text =  "unavailable";
+    bloodController.text = "unavailable";
     genderController.text = personalInfo.value?.gender == "ML"
         ? "MALE"
         : personalInfo.value?.gender == "FL"
@@ -414,15 +441,17 @@ class ProfileController extends SuperController {
     //professional details controller
     designationController.text =
         professional.value?.designation ?? "unavailable";
-    int exp = int.parse(professional.value?.experience??"0");
-    int inYear = exp~/12;
-    int inMonths = exp%12;
+    int exp = int.parse(professional.value?.experience ?? "0");
+    int inYear = exp ~/ 12;
+    int inMonths = exp % 12;
     String experience = "$inYear Year $inMonths Months";
     experienceController.text = experience;
     skillsController.text = professional.value?.skills ?? "unavailable";
-    joiningdateController.text = AppUtils.getStandardFormat(professional.value?.joiningdate ?? "");
-    joiningExperienceController.text =  AppUtils.getYearMonthFromDays(AppUtils.calculateDifference(AppUtils.parseDateTimeFromString(professional.value?.joiningdate??"")));
-
+    joiningdateController.text =
+        AppUtils.getStandardFormat(professional.value?.joiningdate ?? "");
+    joiningExperienceController.text = AppUtils.getYearMonthFromDays(
+        AppUtils.calculateDifference(AppUtils.parseDateTimeFromString(
+            professional.value?.joiningdate ?? "")));
 
     //family details controller
     fatherNameController.text = familyInfo.value?.fathername ?? "unavailable";
@@ -447,6 +476,7 @@ class ProfileController extends SuperController {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    // Called when the controller is hidden. Add your logic here if needed.
+    AppUtils.printMessage('HiddenInvoked');
   }
 }

@@ -21,7 +21,7 @@ class LeaveController extends SuperController {
   final leaveUsed = 0.obs;
   final leaveDetails = Rxn<Leave>();
   DateTime selectedDate = DateTime.now();
-  List<DateTime> firstSecondDate = [DateTime.now(),DateTime.now()];
+  List<DateTime> firstSecondDate = [DateTime.now(), DateTime.now()];
   final startDateController = "dd/mm/yyyy".obs;
   final endDateController = "dd/mm/yyyy".obs;
   TextEditingController reasonController = TextEditingController();
@@ -143,22 +143,23 @@ class LeaveController extends SuperController {
     }
   }
 
-  bool validateLeave(){
-    bool isDateValidated = AppUtils.isFirstBeforeOrEqualThanSecond(firstSecondDate[0], firstSecondDate[1]);
-    if(reasonController.text.isNotEmpty && isDateValidated){
+  bool validateLeave() {
+    bool isDateValidated = AppUtils.isFirstBeforeOrEqualThanSecond(
+        firstSecondDate[0], firstSecondDate[1]);
+    if (reasonController.text.isNotEmpty && isDateValidated) {
       return true;
     }
-    if(reasonController.text.isEmpty){
+    if (reasonController.text.isEmpty) {
       showCustomSnackBar("Reason cannot be blank");
     }
-    if(!isDateValidated){
+    if (!isDateValidated) {
       showCustomSnackBar("End date cannot be smaller than start date");
     }
     return false;
   }
 
   void applyLeaveRequest() async {
-    if(!validateLeave()) {
+    if (!validateLeave()) {
       return;
     }
     DialogHelper.showLoading();
@@ -174,10 +175,10 @@ class LeaveController extends SuperController {
       };
       await LeaveRepository().applyLeave(body).then((value) {
         var js = jsonDecode(value);
-        if(js["status_code"]==201) {
+        if (js["status_code"] == 201) {
           closeScreen();
           Get.snackbar("Leave Successful", "Your leave applied successfully.");
-        }else{
+        } else {
           showCustomSnackBar("Something went wrong");
         }
       });
@@ -191,9 +192,9 @@ class LeaveController extends SuperController {
     Get.back();
   }
 
-  void getTableData(List<LeaveStatus>?  leaveData){
+  void getTableData(List<LeaveStatus>? leaveData) {
     List<List<String>> tempData = [];
-    if(leaveData!=null) {
+    if (leaveData != null) {
       for (var element in leaveData) {
         tempData.add([
           "${element.id}",
@@ -212,6 +213,6 @@ class LeaveController extends SuperController {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    AppUtils.printMessage('HiddenInvoked');
   }
 }

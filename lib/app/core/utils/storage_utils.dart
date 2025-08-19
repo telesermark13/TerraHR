@@ -27,11 +27,11 @@ class StorageUtils {
   }
 
   void setToken(String data) {
-    _box.write(StorageKeys.LoginToken, data);
+    _box.write(StorageKeys.loginToken, data);
   }
 
   String getToken() {
-    return _box.read(StorageKeys.LoginToken) ?? '';
+    return _box.read(StorageKeys.loginToken) ?? '';
   }
 
   void setFullName(String data) {
@@ -51,29 +51,27 @@ class StorageUtils {
   }
 
   void setUserData(String data) {
-    _box.write(StorageKeys.UserData, data);
+    _box.write(StorageKeys.userData, data);
   }
 
   // UserData getUserData(){
-  //   return UserModel.fromJson(jsonDecode(_box.read(StorageKeys.UserData))).userData!;
+  //   return UserModel.fromJson(jsonDecode(_box.read(StorageKeys.userData))).userData!;
   // }
 
-
-
   void setSubscriberId(String data) {
-    _box.write(StorageKeys.SubscriberId, data);
+    _box.write(StorageKeys.subscriberId, data);
   }
 
   String getSubscriberId() {
-    return _box.read(StorageKeys.SubscriberId) ?? '';
+    return _box.read(StorageKeys.subscriberId) ?? '';
   }
 
   void setBouqueId(String data) {
-    _box.write(StorageKeys.BouqueId, data);
+    _box.write(StorageKeys.bouqueId, data);
   }
 
   String getBouqueId() {
-    return _box.read(StorageKeys.BouqueId) ?? '';
+    return _box.read(StorageKeys.bouqueId) ?? '';
   }
 
   void setUsername(String data) {
@@ -91,12 +89,13 @@ class StorageUtils {
   String getProfilePic() {
     return _box.read(StorageKeys.profilePic) ?? '';
   }
+
   void setSelectedAccount(String data) {
-    _box.write(StorageKeys.SelectedAcount, data);
+    _box.write(StorageKeys.selectedAccount, data);
   }
 
   // Accounts getSelectedAccount(){
-  //   return Accounts.fromJson(jsonDecode(_box.read(StorageKeys.SelectedAcount)));
+  //   return Accounts.fromJson(jsonDecode(_box.read(StorageKeys.selectedAccount)));
   // }
 
   //log out
@@ -108,11 +107,11 @@ class StorageUtils {
 class StorageKeys {
   static const String isTutorialShown = 'isTutorialShown';
   static const String isUserLoggedIn = 'isUserLoggedIn';
-  static const String LoginToken = 'LoginToken';
-  static const String UserData = 'UserData';
-  static const String SubscriberId = 'SubscriberId';
-  static const String BouqueId = 'BouqueId';
-  static const String SelectedAcount = 'SelectedAccount';
+  static const String loginToken = 'LoginToken';
+  static const String userData = 'UserData';
+  static const String subscriberId = 'SubscriberId';
+  static const String bouqueId = 'BouqueId';
+  static const String selectedAccount = 'SelectedAccount';
   static const String username = 'username';
   static const String fullName = 'UserFullName';
   static const String designation = 'UserDesignation';

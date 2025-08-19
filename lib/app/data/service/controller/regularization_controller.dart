@@ -92,9 +92,9 @@ class RegularizationController extends SuperController {
     }
   }
 
-  void getTableData(List<Regularization>?  regularization){
+  void getTableData(List<Regularization>? regularization) {
     List<List<String>> tempData = [];
-    if(regularization!=null) {
+    if (regularization != null) {
       for (var element in regularization) {
         AppUtils.printMessage("Adding items: ${element.attdate}");
         tempData.add([
@@ -112,7 +112,7 @@ class RegularizationController extends SuperController {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    // Called when the controller is hidden. Add your logic here if needed.
+    AppUtils.printMessage('HiddenInvoked');
   }
-
 }

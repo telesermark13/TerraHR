@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
-
 class NotificationManagers {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'com.tys.notification', // id
     'TYS Attendance Notifications', // title
     description: 'This channel is used for Attendance related notifications.',
-    // description
     importance: Importance.max,
   );
 
-   static Future onSelectNotification(NotificationResponse notificationResponse) async {
+  static Future onSelectNotification(
+      NotificationResponse notificationResponse) async {
     AppUtils.printMessage("PayloadPrint${notificationResponse.payload}");
-    return   Get.toNamed(AppUtils.getRoutedAction(notificationResponse.payload.toString()));
+    return Get.toNamed(
+        AppUtils.getRoutedAction(notificationResponse.payload.toString()));
   }
 
   static Future<void> setup() async {
@@ -41,14 +41,16 @@ class NotificationManagers {
     );
   }
 
-  static DarwinNotificationDetails iosNotificatonDetail = const DarwinNotificationDetails();
-  static AndroidNotificationDetails androidNotificatonDetail = AndroidNotificationDetails(
+  static DarwinNotificationDetails iosNotificatonDetail =
+      const DarwinNotificationDetails();
+  static AndroidNotificationDetails androidNotificatonDetail =
+      AndroidNotificationDetails(
     channel.id,
     channel.name,
     channelDescription: channel.description,
     color: Colors.blue,
-    // TODO add a proper drawable resource to android, for now using
-    //      one that already exists in example app.
+    // NOTE: currently using the app launcher icon '@mipmap/ic_launcher'.
+    // Replace `icon` with a dedicated drawable in `android/app/src/main/res/*` if you add one.
     icon: "@mipmap/ic_launcher",
   );
   static NotificationDetails notificationDetails = NotificationDetails(
@@ -56,19 +58,16 @@ class NotificationManagers {
     android: androidNotificatonDetail,
   );
 
-  static void showNotification(RemoteMessage message){
+  static void showNotification(RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     AppUtils.printMessage("Push Data${message.data}");
-    AppUtils.printMessage("Push Notification${message.notification?.android?.imageUrl}");
+    AppUtils.printMessage(
+        "Push Notification${message.notification?.android?.imageUrl}");
     if (notification != null && android != null) {
-      flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          notificationDetails,
-          payload: message.data['label'] );
+      flutterLocalNotificationsPlugin.show(notification.hashCode,
+          notification.title, notification.body, notificationDetails,
+          payload: message.data['label']);
     }
   }
-
 }

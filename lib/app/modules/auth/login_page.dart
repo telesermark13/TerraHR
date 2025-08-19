@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius30),
                   boxShadow: [
                     BoxShadow(
-                        color: AppColors.kGrayColor.withOpacity(0.5),
+                        color: AppColors.kGrayColor.withAlpha(128),
                         blurRadius: Dimensions.radius10 / 2,
                         offset: const Offset(1, 5))
                   ]),
@@ -169,12 +169,10 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: Dimensions.height45 * 1.6,
             ),
-           const LikeUsWidget()
+            const LikeUsWidget()
           ],
         ),
       );
     }));
   }
-
-
 }

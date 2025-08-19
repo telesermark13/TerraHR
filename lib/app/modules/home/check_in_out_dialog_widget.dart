@@ -14,7 +14,8 @@ class CheckInDialog {
       message = "You have been successfully checked out.";
     }
     Get.dialog(
-      WillPopScope(
+      PopScope(
+        canPop: false,
         child: Padding(
           padding: EdgeInsets.only(
               left: Dimensions.height45,
@@ -35,26 +36,26 @@ class CheckInDialog {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  isCheckOut?
-                  Lottie.asset(
-                    "assets/anim/check_out_lotte.json",
-                    width: Dimensions.height45 * 5.0,
-                    height: Dimensions.height45 * 5.0,
-                    fit: BoxFit.fill,
-                  ):
-                  isLate
+                  isCheckOut
                       ? Lottie.asset(
-                          "assets/anim/check_in_late_lotte.json",
+                          "assets/anim/check_out_lotte.json",
                           width: Dimensions.height45 * 5.0,
                           height: Dimensions.height45 * 5.0,
                           fit: BoxFit.fill,
                         )
-                      : Lottie.asset(
-                          "assets/anim/check_in_lotte.json",
-                          width: Dimensions.height45 * 5.0,
-                          height: Dimensions.height45 * 5.0,
-                          fit: BoxFit.fill,
-                        ),
+                      : isLate
+                          ? Lottie.asset(
+                              "assets/anim/check_in_late_lotte.json",
+                              width: Dimensions.height45 * 5.0,
+                              height: Dimensions.height45 * 5.0,
+                              fit: BoxFit.fill,
+                            )
+                          : Lottie.asset(
+                              "assets/anim/check_in_lotte.json",
+                              width: Dimensions.height45 * 5.0,
+                              height: Dimensions.height45 * 5.0,
+                              fit: BoxFit.fill,
+                            ),
                   SizedBox(height: Dimensions.height15),
                   Text(
                     message,
@@ -75,12 +76,12 @@ class CheckInDialog {
       ),
       barrierDismissible: false,
     );
-    if(isCheckOut){
+    if (isCheckOut) {
       TonePlay(TonePlay.checkOutPlay);
-    }else {
-      if(isLate){
+    } else {
+      if (isLate) {
         TonePlay(TonePlay.checkInLatePlay);
-      }else {
+      } else {
         TonePlay(TonePlay.checkInPlay);
       }
     }

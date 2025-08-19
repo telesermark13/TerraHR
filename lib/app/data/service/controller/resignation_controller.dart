@@ -49,9 +49,10 @@ class ResignationController extends SuperController {
     AppUtils.printMessage('ResumeInvoked');
   }
 
-  void setResignationDate(){
+  void setResignationDate() {
     applyDateController.text = AppUtils.getCurrentDateInverse();
-    resignDateController.text = AppUtils.getAddedDays(AppConstants.kResignationDays);
+    resignDateController.text =
+        AppUtils.getAddedDays(AppConstants.kResignationDays);
   }
 
   void applyResignation() {
@@ -99,9 +100,9 @@ class ResignationController extends SuperController {
     }
   }
 
-  void getTableData(List<Resignation>?  resignation){
+  void getTableData(List<Resignation>? resignation) {
     List<List<String>> tempData = [];
-    if(resignation!=null) {
+    if (resignation != null) {
       for (var element in resignation) {
         AppUtils.printMessage("Adding items: ${element.applieddate}");
         tempData.add([
@@ -120,7 +121,7 @@ class ResignationController extends SuperController {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    // Called when the controller is hidden. Add your logic here if needed.
+    AppUtils.printMessage('HiddenInvoked');
   }
-
 }

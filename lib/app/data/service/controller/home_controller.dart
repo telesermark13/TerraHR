@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:employee_attendance_flutter/app/core/utils/NotificationManagers.dart';
+import 'package:employee_attendance_flutter/app/core/utils/notification_managers.dart';
 import 'package:employee_attendance_flutter/app/core/utils/app_utils.dart';
 import 'package:employee_attendance_flutter/app/core/utils/constants.dart';
 import 'package:employee_attendance_flutter/app/core/utils/storage_utils.dart';
@@ -364,6 +364,6 @@ class HomeController extends SuperController  {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    AppUtils.printMessage('HiddenInvoked');
   }
 }

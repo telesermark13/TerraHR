@@ -115,7 +115,7 @@ class ReimburseController extends SuperController {
   }
 
   void addItem() {
-    if(count.value<5) {
+    if (count.value < 5) {
       count.value = count.value + 1;
       descEditControllers.add(TextEditingController(text: ""));
       rateEditControllers.add(TextEditingController(text: "0"));
@@ -124,7 +124,7 @@ class ReimburseController extends SuperController {
       receiptEditControllers.add(TextEditingController(text: ""));
       update();
       scrollDown();
-    }else{
+    } else {
       showCustomSnackBar("Maximum 5 items can be added");
     }
   }
@@ -248,6 +248,7 @@ class ReimburseController extends SuperController {
 
   @override
   void onHidden() {
-    // TODO: implement onHidden
+    // Called when the controller is hidden. Add your logic here if needed.
+    AppUtils.printMessage('HiddenInvoked');
   }
 }

@@ -17,14 +17,19 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../core/utils/dimensions.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   Future<void> showOptionsDialog(
       BuildContext context, ProfileController controller) {
     return showDialog(
         context: context,
-        builder: (BuildContext context) {
+        builder: (BuildContext dialogContext) {
           return AlertDialog(
             title: const Center(child: Text("Options")),
             content: SingleChildScrollView(
@@ -34,28 +39,30 @@ class ProfilePage extends StatelessWidget {
                     child: const Row(
                       children: [
                         Icon(Icons.camera_alt_outlined),
-                        SizedBox(width: 6,),
+                        SizedBox(
+                          width: 6,
+                        ),
                         Text("Capture From Camera"),
                       ],
                     ),
                     onTap: () async {
                       final picker = ImagePicker();
-                      await picker
-                          .pickImage(
-                              source: ImageSource.camera,
-                              maxWidth: 800,
-                              maxHeight: 800)
-                          .then((value) async {
-                        AppUtils.cropImage(context, value?.path ?? "")
-                            .then((value) {
-                          Get.back();
-                          ProfileRepository().updateProfilePicture(
-                              File(value?.path ?? ""),
-                              controller.userInfo.value?.userid ?? "").then((value) => {
-                            controller.getUserData()
-                          });
-                        });
-                      });
+                      final pickedFile = await picker.pickImage(
+                        source: ImageSource.camera,
+                        maxWidth: 800,
+                        maxHeight: 800,
+                      );
+                      if (pickedFile != null) {
+                        final croppedFile = await AppUtils.cropImage(
+                            dialogContext, pickedFile.path);
+                        if (!mounted) return;
+                        Get.back();
+                        await ProfileRepository().updateProfilePicture(
+                          File(croppedFile?.path ?? ""),
+                          controller.userInfo.value?.userid ?? "",
+                        );
+                        controller.getUserData();
+                      }
                     },
                   ),
                   const Padding(padding: EdgeInsets.all(10)),
@@ -63,29 +70,29 @@ class ProfilePage extends StatelessWidget {
                     child: const Row(
                       children: [
                         Icon(Icons.image_outlined),
-                        SizedBox(width: 6,),
+                        SizedBox(
+                          width: 6,
+                        ),
                         Text("Choose From Gallery"),
                       ],
                     ),
                     onTap: () async {
                       final picker = ImagePicker();
                       AppUtils.printMessage("Image picking start");
-                      await picker
-                          .pickImage(
-                              source: ImageSource.gallery,
-                              maxWidth: 800,
-                              maxHeight: 800)
-                          .then((value) async {
-                        AppUtils.cropImage(context, value?.path ?? "")
-                            .then((value) {
-                          Get.back();
-                          ProfileRepository().updateProfilePicture(
-                              File(value?.path ?? ""),
-                              controller.userInfo.value?.userid ?? "").then((value) => {
-                                controller.getUserData()
-                          });
-                        });
-                      });
+                      final pickedFile = await picker.pickImage(
+                          source: ImageSource.gallery,
+                          maxWidth: 800,
+                          maxHeight: 800);
+                      if (pickedFile != null) {
+                        final croppedFile = await AppUtils.cropImage(
+                            dialogContext, pickedFile.path);
+                        if (!mounted) return;
+                        Get.back();
+                        await ProfileRepository().updateProfilePicture(
+                            File(croppedFile?.path ?? ""),
+                            controller.userInfo.value?.userid ?? "");
+                        controller.getUserData();
+                      }
                     },
                     // openGallery();
                   ),
@@ -209,7 +216,7 @@ class ProfilePage extends StatelessWidget {
                   collapsed: Padding(
                     padding: const EdgeInsets.only(
                         left: 8.0, right: 8.0, top: 2, bottom: 2),
-                    child:UserDetailsWidget(controller: controller),
+                    child: UserDetailsWidget(controller: controller),
                   ),
                   expanded: Container(),
                   theme: ExpandableThemeData(
@@ -287,7 +294,7 @@ class ProfilePage extends StatelessWidget {
                     expanded: Padding(
                       padding: const EdgeInsets.only(
                           left: 8.0, right: 8.0, top: 2, bottom: 2),
-                      child:  PersonalDetailsWidget(controller: controller),
+                      child: PersonalDetailsWidget(controller: controller),
                     ),
                     theme: ExpandableThemeData(
                         headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -326,7 +333,7 @@ class ProfilePage extends StatelessWidget {
                     expanded: Padding(
                       padding: const EdgeInsets.only(
                           left: 8.0, right: 8.0, top: 2, bottom: 2),
-                      child:FamilyDetailsWidget(controller: controller),
+                      child: FamilyDetailsWidget(controller: controller),
                     ),
                     theme: ExpandableThemeData(
                         headerAlignment: ExpandablePanelHeaderAlignment.center,

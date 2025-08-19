@@ -8,7 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'app/core/colors/colors.dart';
-import 'app/core/utils/NotificationManagers.dart';
+import 'app/core/utils/notification_managers.dart';
 import 'app/routes/routes.dart';
 import 'firebase_options.dart';
 
