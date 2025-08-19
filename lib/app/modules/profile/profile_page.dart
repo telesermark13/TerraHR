@@ -1,5 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
 import 'dart:io';
-
 import 'package:employee_attendance_flutter/app/core/colors/colors.dart';
 import 'package:employee_attendance_flutter/app/core/utils/app_utils.dart';
 import 'package:employee_attendance_flutter/app/core/utils/storage_utils.dart';

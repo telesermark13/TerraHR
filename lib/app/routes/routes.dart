@@ -33,7 +33,7 @@ import '../modules/home/bottom_navigator_page.dart';
 import '../modules/regularization/regularization_display_page.dart';
 import '../modules/regularization/regularization_page.dart';
 
-class Routes{
+class Routes {
   static const String splashPage = "/splash-page";
   static const String initialPage = "/";
   static const String loginPage = "/login-page";
@@ -56,149 +56,127 @@ class Routes{
   static const String holidayPage = "/holiday-page";
 
   ///Get routes
-  static getSplashPage() => splashPage;
-  static getInitialPage() => initialPage;
-  static getLoginPage() => loginPage;
-  static getAttendancePage() => attendancePAge;
-  static getNavigationPage() => navigationPage;
-  static getSettingPage() => settingPage;
-  static getProfilePage() => profilePage;
-  static getEditProfilePage() => editProfilePage;
-  static getRegularizationPage() => regularizationPage;
-  static getRegularizationDisplayPage() => regularizationDisplay;
-  static getLeavePage() => leavePage;
-  static getLeaveStatusPage() => leaveStatusPage;
-  static getResignApplyPage() => resinApplyPage;
-  static getResignStatusPage() => resinStatusPage;
-  static getIdCardPage() => idCardPage;
-  static getIdCardPrintPdf() => idCardPrintPdf;
-  static getReimbursePage() => reimburseApplyPage;
-  static getReimburseStatusPage() => reimburseStatusPage;
-  static getNotificationPage() => notificationPage;
-  static getHolidayPage() => holidayPage;
+  static String getSplashPage() => splashPage;
+  static String getInitialPage() => initialPage;
+  static String getLoginPage() => loginPage;
+  static String getAttendancePage() => attendancePAge;
+  static String getNavigationPage() => navigationPage;
+  static String getSettingPage() => settingPage;
+  static String getProfilePage() => profilePage;
+  static String getEditProfilePage() => editProfilePage;
+  static String getRegularizationPage() => regularizationPage;
+  static String getRegularizationDisplayPage() => regularizationDisplay;
+  static String getLeavePage() => leavePage;
+  static String getLeaveStatusPage() => leaveStatusPage;
+  static String getResignApplyPage() => resinApplyPage;
+  static String getResignStatusPage() => resinStatusPage;
+  static String getIdCardPage() => idCardPage;
+  static String getIdCardPrintPdf() => idCardPrintPdf;
+  static String getReimbursePage() => reimburseApplyPage;
+  static String getReimburseStatusPage() => reimburseStatusPage;
+  static String getNotificationPage() => notificationPage;
+  static String getHolidayPage() => holidayPage;
 
   static List<GetPage> routes = [
     GetPage(
         name: getSplashPage(),
-        page: ()=>const SplashPage(),
-        transition: Transition.fadeIn
-    ),
+        page: () => const SplashPage(),
+        transition: Transition.fadeIn),
     GetPage(
-        name: getInitialPage(),
-        page: ()=>const HomePage(),
-        transition: Transition.fadeIn,
-         binding:HomeBinding(),
+      name: getInitialPage(),
+      page: () => const HomePage(),
+      transition: Transition.fadeIn,
+      binding: HomeBinding(),
     ),
     GetPage(
         name: getLoginPage(),
-        page: ()=>const LoginPage(),
+        page: () => const LoginPage(),
         transition: Transition.fadeIn,
-      binding: LoginBinding()
-
-    ),
+        binding: LoginBinding()),
     GetPage(
         name: getAttendancePage(),
-        page: ()=>const AttendancePage(),
+        page: () => const AttendancePage(),
         transition: Transition.fadeIn,
-        binding: AttendanceBinding()
-
-    ),
+        binding: AttendanceBinding()),
     GetPage(
         name: getNavigationPage(),
-        page: ()=>const BottomNavigationPage(),
+        page: () => const BottomNavigationPage(),
         transition: Transition.fadeIn,
-        binding: HomeBinding()
-    ),
+        binding: HomeBinding()),
     GetPage(
         name: getSettingPage(),
-        page: ()=>const SettingPage(),
+        page: () => const SettingPage(),
         transition: Transition.fadeIn,
-        binding: SettingsBinding()
-    ),
+        binding: SettingsBinding()),
     GetPage(
         name: getProfilePage(),
-        page: ()=>const ProfilePage(),
+        page: () => const ProfilePage(),
         transition: Transition.fadeIn,
-        binding: ProfileBinding()
-    ),
+        binding: ProfileBinding()),
     GetPage(
         name: getEditProfilePage(),
-        page: ()=>const ProfileEditPage(),
+        page: () => const ProfileEditPage(),
         transition: Transition.fadeIn,
-        binding: ProfileBinding()
-    ),
+        binding: ProfileBinding()),
     GetPage(
         name: getRegularizationPage(),
-        page: ()=>const RegularizationPage(),
+        page: () => const RegularizationPage(),
         transition: Transition.fadeIn,
-        binding: RegularizationBinding()
-    ),
+        binding: RegularizationBinding()),
     GetPage(
         name: getRegularizationDisplayPage(),
-        page: ()=>const RegularizationDisplayPage(),
+        page: () => const RegularizationDisplayPage(),
         transition: Transition.fadeIn,
-        binding: RegularizationBinding()
-    ),
+        binding: RegularizationBinding()),
     GetPage(
         name: getLeavePage(),
-        page: ()=>const LeavePage(),
+        page: () => const LeavePage(),
         transition: Transition.fadeIn,
-        binding: LeaveBinding()
-    ),
+        binding: LeaveBinding()),
     GetPage(
         name: getLeaveStatusPage(),
-        page: ()=>const LeaveStatusPage(),
+        page: () => const LeaveStatusPage(),
         transition: Transition.fadeIn,
-        binding: LeaveBinding()
-    ),
+        binding: LeaveBinding()),
     GetPage(
         name: getResignApplyPage(),
-        page: ()=>const ResignationPage(),
+        page: () => const ResignationPage(),
         transition: Transition.fadeIn,
-        binding: ResignationBinding()
-    ),
+        binding: ResignationBinding()),
     GetPage(
         name: getResignStatusPage(),
-        page: ()=>const ResignationStatusPage(),
+        page: () => const ResignationStatusPage(),
         transition: Transition.fadeIn,
-        binding: ResignationBinding()
-    ),
+        binding: ResignationBinding()),
     GetPage(
         name: getIdCardPage(),
-        page: ()=> IDCARDPage(),
+        page: () => const IDCARDPage(),
         transition: Transition.fadeIn,
-        binding: IDCARDBinding()
-    ),
+        binding: IDCARDBinding()),
     GetPage(
         name: getIdCardPrintPdf(),
-        page: ()=> IDCARDPrintPdf(),
+        page: () => const IDCARDPrintPdf(),
         transition: Transition.fadeIn,
-        binding: IDCARDBinding()
-    ),
+        binding: IDCARDBinding()),
     GetPage(
         name: getReimbursePage(),
-        page: ()=> const ReimbursePage(),
+        page: () => const ReimbursePage(),
         transition: Transition.fadeIn,
-        binding: ReimburseBinding()
-    ),
+        binding: ReimburseBinding()),
     GetPage(
         name: getReimburseStatusPage(),
-        page: ()=> const ReimburseStatusPage(),
+        page: () => const ReimburseStatusPage(),
         transition: Transition.fadeIn,
-        binding: ReimburseBinding()
-    ),
+        binding: ReimburseBinding()),
     GetPage(
         name: getNotificationPage(),
-        page: ()=> const NotificationDisplayPage(),
+        page: () => const NotificationDisplayPage(),
         transition: Transition.fadeIn,
-        binding: NotificationBinding()
-    ),
+        binding: NotificationBinding()),
     GetPage(
         name: getHolidayPage(),
-        page: ()=> const HolidayPage(),
+        page: () => const HolidayPage(),
         transition: Transition.fadeIn,
-        binding: HolidayBinding()
-    ),
+        binding: HolidayBinding()),
   ];
-
 }

@@ -15,12 +15,13 @@ class ErrorHandling {
   static bool showError = true;
 
   static bool isAlreadyOnLogout = false;
-  static const int LOCATION_SETTING_ACTION = 1;
+  static const int locationSettingAction = 1;
 
-  static void handleErrors(error) {
+  static void handleErrors(Object error) {
     if (error is UnAuthorisedException) {
       if (!isAlreadyOnLogout) {
-        showErrorPopUp("ERROR", 'Unauthorized','Logout').then((value) => logout());
+        showErrorPopUp("ERROR", 'Unauthorized', 'Logout')
+            .then((value) => logout());
       }
     } else if (error is SocketException) {
       showErrorPopUp("ERROR", "Looks like not connected to internet", 'OK');
@@ -30,7 +31,7 @@ class ErrorHandling {
         var msg = ApiMessage.fromJson(jsonMap);
         showErrorPopUp("ERROR", msg.message, 'OK');
       } catch (e) {
-        showErrorPopUp("ERROR",'Something went wrong','OK');
+        showErrorPopUp("ERROR", 'Something went wrong', 'OK');
       }
     } else {
       try {
@@ -38,12 +39,13 @@ class ErrorHandling {
         var msg = ApiMessage.fromJson(jsonMap);
         showErrorPopUp("ERROR", msg.message, 'OK');
       } catch (e) {
-        showErrorPopUp("ERROR",'Something went wrong','OK');
+        showErrorPopUp("ERROR", 'Something went wrong', 'OK');
       }
     }
   }
 
-  static Future<void> showErrorPopUp(String title, String message, String buttonText)async {
+  static Future<void> showErrorPopUp(
+      String title, String message, String buttonText) async {
     bool isOpen = Get.isDialogOpen!;
     if (!isOpen) {
       return await Get.defaultDialog(
@@ -54,9 +56,9 @@ class ErrorHandling {
           color: AppColors.kMainBlackColor,
           fontSize: 16,
         ),
-        middleTextStyle:const TextStyle(
+        middleTextStyle: const TextStyle(
           fontWeight: FontWeight.w600,
-          color:AppColors.kMainBlackColor,
+          color: AppColors.kMainBlackColor,
           fontSize: 16,
         ),
         textConfirm: buttonText,
@@ -66,15 +68,12 @@ class ErrorHandling {
         onConfirm: () {
           Get.back(result: 'success');
         },
-        onWillPop: () async {
-          return false;
-        },
       );
     }
   }
 
-
-  static Future<void> showErrorWithAction(String title, String message, String buttonText, int action)async {
+  static Future<void> showErrorWithAction(
+      String title, String message, String buttonText, int action) async {
     bool isOpen = Get.isDialogOpen!;
     if (!isOpen) {
       return await Get.defaultDialog(
@@ -85,9 +84,9 @@ class ErrorHandling {
           color: AppColors.kMainBlackColor,
           fontSize: 16,
         ),
-        middleTextStyle:const TextStyle(
+        middleTextStyle: const TextStyle(
           fontWeight: FontWeight.w600,
-          color:AppColors.kMainBlackColor,
+          color: AppColors.kMainBlackColor,
           fontSize: 16,
         ),
         textConfirm: buttonText,
@@ -95,22 +94,19 @@ class ErrorHandling {
         buttonColor: AppColors.kPrimaryColor,
         barrierDismissible: false,
         onConfirm: () {
-          if(action==LOCATION_SETTING_ACTION){
-           openAppSettings();
-           Future.delayed(const Duration(milliseconds: 200), () {
+          if (action == locationSettingAction) {
+            openAppSettings();
+            Future.delayed(const Duration(milliseconds: 200), () {
               exit(0);
-           });
+            });
           }
-        },
-        onWillPop: () async {
-          return false;
         },
       );
     }
   }
 
   static Future<dynamic> showCancelableErrorPopUp(String title, String message,
-      String confirmButtonText, String cancelButtonText) async{
+      String confirmButtonText, String cancelButtonText) async {
     //if (showError) {
     bool isOpen = Get.isDialogOpen!;
     if (!isOpen) {
@@ -122,7 +118,7 @@ class ErrorHandling {
           color: AppColors.kMainBlackColor,
           fontSize: 16,
         ),
-        middleTextStyle:const TextStyle(
+        middleTextStyle: const TextStyle(
           fontWeight: FontWeight.w600,
           color: AppColors.kMainBlackColor,
           fontSize: 16,
@@ -135,11 +131,8 @@ class ErrorHandling {
           //showError = true;
           Get.back(result: 'ok');
         },
-        onWillPop: () async {
-          return false;
-        },
         textCancel: cancelButtonText,
-        cancelTextColor:AppColors.kMainBlackColor,
+        cancelTextColor: AppColors.kMainBlackColor,
         onCancel: () {
           //showError = true;
           Get.back(result: 'cancel');
@@ -152,18 +145,19 @@ class ErrorHandling {
     isAlreadyOnLogout = true;
     StorageUtils.instance.clearAll();
     Get.offAll(
-          () => const SplashPage(),
+      () => const SplashPage(),
       transition: Transition.rightToLeft,
     );
   }
 
-  static void showToast(String message){
+  static void showToast(String message) {
     Get.closeAllSnackbars();
-    Get.snackbar('Message', message,
+    Get.snackbar(
+      'Message',
+      message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors.kMainBlackColor,
       colorText: AppColors.kWhiteColor,
     );
   }
-
 }

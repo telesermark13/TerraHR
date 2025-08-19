@@ -51,15 +51,15 @@ class AttendanceTableWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(2.0),
                               decoration: BoxDecoration(
                                   color: data.attstatus == "Present"
-                                      ? AppColors.kChartPresent.withOpacity(0.2)
+                                      ? AppColors.kChartPresent.withAlpha(51)
                                       : data.attstatus == "Late"
                                           ? AppColors.kSecondaryColor
-                                              .withOpacity(0.2)
+                                              .withAlpha(51)
                                           : data.attstatus == "Absent"
                                               ? AppColors.kRedColor
-                                                  .withOpacity(0.2)
+                                                  .withAlpha(51)
                                               : AppColors.kGrayDeem
-                                                  .withOpacity(0.2),
+                                                  .withAlpha(51),
                                   borderRadius: BorderRadius.circular(6)),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -136,13 +136,14 @@ class AttendanceTableWidget extends StatelessWidget {
                                 Get.toNamed(Routes.regularizationPage,
                                     arguments: RegularizationArguments(
                                         data.userid ?? "",
-                                        data.id.toString() ?? "",
+                                        data.id.toString(),
                                         data.email ?? "",
                                         data.attdate ?? ""));
-                              }else if(value==2){
+                              } else if (value == 2) {
                                 Get.toNamed(Routes.leavePage,
                                     arguments: LeaveArguments(
-                                       AppUtils.parseDateTimeFromString(data.attdate ?? "")));
+                                        AppUtils.parseDateTimeFromString(
+                                            data.attdate ?? "")));
                               }
                             },
                             itemBuilder: (context) => [

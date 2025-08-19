@@ -46,8 +46,8 @@ class AttendancePage extends StatelessWidget {
                             child: YearPicker(
                               firstDate: DateTime(DateTime.now().year - 100, 1),
                               lastDate: DateTime(DateTime.now().year + 100, 1),
-                              initialDate: DateTime.now(),
-                              selectedDate: controller.selectedYear.value??DateTime.now(),
+                              selectedDate: controller.selectedYear.value ??
+                                  DateTime.now(),
                               onChanged: (DateTime dateTime) {
                                 Navigator.pop(context);
                                 controller.setYearSelection(dateTime);
@@ -63,7 +63,10 @@ class AttendancePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(AppUtils.getYearFromDate(controller.selectedYear.value??DateTime.now()),
+                        Text(
+                            AppUtils.getYearFromDate(
+                                controller.selectedYear.value ??
+                                    DateTime.now()),
                             style: TextStyle(
                                 fontSize: Dimensions.font18,
                                 fontWeight: FontWeight.w600)),

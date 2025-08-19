@@ -1,4 +1,3 @@
-import 'package:employee_attendance_flutter/app/core/utils/app_utils.dart';
 import 'package:employee_attendance_flutter/app/modules/idcard/id_card_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,16 +8,11 @@ import 'package:printing/printing.dart';
 import 'id_card_pdf_export_apge.dart';
 
 class IDCARDPrintPdf extends StatelessWidget {
-  IDCARDPrintPdf({super.key});
-  IDCARDArguments? args;
+  const IDCARDPrintPdf({super.key});
 
   @override
   Widget build(BuildContext context) {
-    try {
-      args = Get.arguments as IDCARDArguments;
-    } catch (e) {
-      AppUtils.printMessage(e.toString());
-    }
+    final IDCARDArguments? args = Get.arguments as IDCARDArguments?;
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(

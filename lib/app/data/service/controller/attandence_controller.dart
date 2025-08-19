@@ -137,12 +137,12 @@ class AttendanceController extends GetxController with StateMixin<dynamic> {
         totalHours.value =
             attendanceRoot.attendanceCount?.workedInMonth.toString() ?? "NA";
         maxHours.value =
-            attendanceRoot.attendanceCount?.totalWorkHourInMonth.toString() ?? "NA";
-        List<Attendance>? attendanceFiltered =
-            attendanceDetail?.whereType<Attendance>().toList();
-        if (attendanceFiltered != null) {
-          attendanceData.value = attendanceFiltered;
-        }
+            attendanceRoot.attendanceCount?.totalWorkHourInMonth.toString() ??
+                "NA";
+        List<Attendance> attendanceFiltered =
+            (attendanceDetail?.whereType<Attendance>().toList()) ??
+                <Attendance>[];
+        attendanceData.value = attendanceFiltered;
         if (attendanceData.isEmpty) {
           totalDays.value = "NA";
           workingDays.value = "NA";
@@ -170,7 +170,13 @@ class AttendanceController extends GetxController with StateMixin<dynamic> {
           leave = attendanceRoot.attendanceCount?.leaveCount?.toDouble() ??
               0.toDouble();
         }
-        chartMap({"Present": present, "Absent": absent, "Late": late,"Half Day":halfDay,"Leave":leave});
+        chartMap({
+          "Present": present,
+          "Absent": absent,
+          "Late": late,
+          "Half Day": halfDay,
+          "Leave": leave
+        });
         DialogHelper.dismissLoader();
         update();
         Future.delayed(const Duration(milliseconds: 500), () {

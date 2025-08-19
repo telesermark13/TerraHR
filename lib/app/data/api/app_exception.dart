@@ -1,12 +1,12 @@
 class AppException implements Exception {
-  final _message;
-  final _prefix;
+  final String? _message;
+  final String? _prefix;
 
   AppException([this._message, this._prefix]);
 
   @override
   String toString() {
-    return "$_prefix$_message";
+    return "${_prefix ?? ''}${_message ?? ''}";
   }
 }
 
@@ -15,19 +15,19 @@ class FetchDataException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException([message]) : super(message, "");
+  BadRequestException([String? message]) : super(message, "");
 }
 
 class UnProcessableEntity extends AppException {
-  UnProcessableEntity([message]) : super(message, "");
+  UnProcessableEntity([String? message]) : super(message, "");
 }
 
 class UnAuthorisedException extends AppException {
-  UnAuthorisedException([message]) : super(message, "");
+  UnAuthorisedException([String? message]) : super(message, "");
 }
 
 class ForbiddenException extends AppException {
-  ForbiddenException([message]) : super(message, "");
+  ForbiddenException([String? message]) : super(message, "");
 }
 
 class InvalidInputException extends AppException {

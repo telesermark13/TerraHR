@@ -60,7 +60,7 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                     color: PdfColor.fromInt(
-                                        AppColors.kSecondaryColor.value),
+                                        AppColors.kSecondaryColor.toARGB32()),
                                     width: 4),
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
@@ -75,7 +75,7 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(idCardData.firstName ?? "",
+                                Text(idCardData.firstName,
                                     style: TextStyle(
                                         fontSize: Dimensions.font32,
                                         fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
-                                Text(idCardData.lastName ?? "",
+                                Text(idCardData.lastName,
                                     style: TextStyle(
                                         fontSize: Dimensions.font32,
                                         fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: FittedBox(
-                            child: Text(idCardData.designation ?? "",
+                            child: Text(idCardData.designation,
                                 style: TextStyle(
                                     fontSize: Dimensions.font16,
                                     fontWeight: FontWeight.bold,
@@ -123,12 +123,13 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                       children: [
                         Icon(
                           const IconData(0xe8e8),
-                          color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                          color: PdfColor.fromInt(
+                              AppColors.kPrimaryDark.toARGB32()),
                         ),
                         SizedBox(
                           width: Dimensions.height45,
                         ),
-                        Text(idCardData.userID ?? "",
+                        Text(idCardData.userID,
                             style: TextStyle(
                                 fontSize: Dimensions.font20,
                                 fontWeight: FontWeight.bold,
@@ -142,7 +143,8 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                       children: [
                         Icon(
                           const IconData(0xe7e9),
-                          color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                          color: PdfColor.fromInt(
+                              AppColors.kPrimaryDark.toARGB32()),
                         ),
                         SizedBox(
                           width: Dimensions.height45,
@@ -162,8 +164,8 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                     Row(
                       children: [
                         Icon(const IconData(0xe92c),
-                            color:
-                                PdfColor.fromInt(AppColors.kPrimaryDark.value)),
+                            color: PdfColor.fromInt(
+                                AppColors.kPrimaryDark.toARGB32())),
                         SizedBox(
                           width: Dimensions.height45,
                         ),
@@ -186,12 +188,13 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                       children: [
                         Icon(
                           const IconData(0xefe4),
-                          color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                          color: PdfColor.fromInt(
+                              AppColors.kPrimaryDark.toARGB32()),
                         ),
                         SizedBox(
                           width: Dimensions.height45,
                         ),
-                        Text(idCardData.bloodGroup ?? "NA",
+                        Text(idCardData.bloodGroup,
                             style: TextStyle(
                                 fontSize: Dimensions.font16,
                                 fontWeight: FontWeight.normal,
@@ -205,12 +208,13 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                       children: [
                         Icon(
                           const IconData(0xe0cd),
-                          color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                          color: PdfColor.fromInt(
+                              AppColors.kPrimaryDark.toARGB32()),
                         ),
                         SizedBox(
                           width: Dimensions.height45,
                         ),
-                        Text(idCardData.phone ?? "NA",
+                        Text(idCardData.phone,
                             style: TextStyle(
                                 fontSize: Dimensions.font16,
                                 fontWeight: FontWeight.normal,
@@ -224,7 +228,8 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                       children: [
                         Icon(
                           const IconData(0xe0af),
-                          color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                          color: PdfColor.fromInt(
+                              AppColors.kPrimaryDark.toARGB32()),
                         ),
                         //mat.Icons.business_c
                         SizedBox(
@@ -284,7 +289,8 @@ Future<Uint8List> makeIDCardPdf(IDCARDArguments idCardData) async {
                   children: [
                     Icon(
                       const IconData(0xe0c8),
-                      color: PdfColor.fromInt(AppColors.kPrimaryDark.value),
+                      color:
+                          PdfColor.fromInt(AppColors.kPrimaryDark.toARGB32()),
                     ),
                     SizedBox(
                       width: Dimensions.height20,

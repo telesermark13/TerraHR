@@ -70,9 +70,6 @@ class CheckInDialog {
             ),
           ),
         ),
-        onWillPop: () async {
-          return false;
-        },
       ),
       barrierDismissible: false,
     );
@@ -92,7 +89,7 @@ class CheckInDialog {
 
   static void dismissDialog() async {
     bool? isOpen = Get.isDialogOpen;
-    if (isOpen!) {
+    if (isOpen == true) {
       Get.back();
     }
   }

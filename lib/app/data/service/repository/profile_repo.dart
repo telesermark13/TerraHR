@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:employee_attendance_flutter/app/core/utils/app_utils.dart';
@@ -11,22 +10,21 @@ class ProfileRepository {
 
   Future<dynamic> updateProfile(Map<String, String> body, String url) async {
     try {
-      print(body);
-      final response =
-          await ApiClient.client.putApi(url, body: body);
+      AppUtils.printMessage("updateProfile body: $body");
+      final response = await ApiClient.client.putApi(url, body: body);
       return response;
     } catch (e) {
       return Future.error(e);
     }
   }
 
-
   Future<dynamic> updateProfilePicture(File imageFile, String id) async {
     try {
       AppUtils.printMessage("Profile picture updating..");
-      print("Size FIle: ${await AppUtils.getFileSize(imageFile)}");
-      final response =
-      await ApiClient.client.uploadPictureAPI(imageFile,APIPath.kPostProfilePicture, id);
+      AppUtils.printMessage(
+          "Size FIle: ${await AppUtils.getFileSize(imageFile)}");
+      final response = await ApiClient.client
+          .uploadPictureAPI(imageFile, APIPath.kPostProfilePicture, id);
       AppUtils.printMessage("Profile picture updated..$response");
       return response;
     } catch (e) {

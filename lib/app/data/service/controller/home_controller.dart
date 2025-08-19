@@ -28,7 +28,7 @@ import '../../api/api_path.dart';
 import '../../api/error_handling.dart';
 import '../../model/office_location_model.dart';
 
-class HomeController extends SuperController  {
+class HomeController extends SuperController {
   static HomeController get to => Get.find();
 
   final messaging = FirebaseMessaging.instance;
@@ -48,9 +48,9 @@ class HomeController extends SuperController  {
   final distanceFromOffice = 0.0.obs;
   bool isUserInRadius = false;
   var selectedIndex = 0.obs;
-  String deviceOS="";
-  String deviceName="";
-  String oSVersion="";
+  String deviceOS = "";
+  String deviceName = "";
+  String oSVersion = "";
 
   List<Widget> pages = [
     const HomePage(),
@@ -62,7 +62,7 @@ class HomeController extends SuperController  {
   void onTap(int index) {
     selectedIndex(index);
     update();
-    if(index==0){
+    if (index == 0) {
       onReady();
     }
   }
@@ -111,19 +111,21 @@ class HomeController extends SuperController  {
           UserDetails? userDetail = userRoot.data?[0];
           userDetails.value = userDetail;
           isRemoteUser(userDetail?.worklocation == "wfh");
-          StorageUtils.instance.setFullName("${userDetail?.firstname ?? "Unknown user"} ${userDetail?.lastname??""}");
+          StorageUtils.instance.setFullName(
+              "${userDetail?.firstname ?? "Unknown user"} ${userDetail?.lastname ?? ""}");
         }
 
         if (userRoot.professionalDetails?.isNotEmpty == true) {
           ProfessionalDetail? professionalInfo =
               userRoot.professionalDetails?[0];
           professionDetails.value = professionalInfo;
-          StorageUtils.instance.setDesignation(professionalInfo?.designation??"Unknown profession");
+          StorageUtils.instance.setDesignation(
+              professionalInfo?.designation ?? "Unknown profession");
         }
         if (userRoot.personalDetails?.isNotEmpty == true) {
           PersonalDetail? personalDetail = userRoot.personalDetails?[0];
           personalDetails.value = personalDetail;
-          String path = APIPath.kProfilePicPrefix+(personalDetail?.src??"");
+          String path = APIPath.kProfilePicPrefix + (personalDetail?.src ?? "");
           StorageUtils.instance.setProfilePic(path);
         }
         update();
@@ -182,7 +184,7 @@ class HomeController extends SuperController  {
           totalHours.value = attendance?.totalhours ?? "00:00";
           if (checkInTime.value != "00:00:00" || checkInTime.value != "00:00") {
             isCheckedIn.value = true;
-          }else{
+          } else {
             isCheckedIn.value = false;
           }
         }
@@ -218,8 +220,8 @@ class HomeController extends SuperController  {
 
       AppUtils.printMessage("User In Radius: $distanceFromOffice");
       if (distanceFromOffice <= AppConstants.kCheckInDistance) {
-         isUserInRadius = true;
-      }else{
+        isUserInRadius = true;
+      } else {
         isUserInRadius = false;
       }
     } catch (e) {
@@ -245,8 +247,7 @@ class HomeController extends SuperController  {
     }
   }
 
-
-  getLocation() async {
+  Future<void> getLocation() async {
     bool serviceEnabled;
 
     LocationPermission permission;
@@ -254,25 +255,22 @@ class HomeController extends SuperController  {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
+      return;
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        getLocation();
-        return Future.error('Location permissions are denied');
+        return;
       } else if (permission == LocationPermission.deniedForever) {
         Future.delayed(const Duration(milliseconds: 1500), () {
           ErrorHandling.showErrorWithAction(
               "ERROR",
               "Please grant location permission first from app settings",
               'Open Settings',
-              ErrorHandling.LOCATION_SETTING_ACTION);
+              ErrorHandling.locationSettingAction);
         });
-        // Permissions are denied forever, handle appropriately.
-        return Future.error(
-            'Location permissions are permanently denied, we cannot request permissions.');
+        return;
       }
     }
     if (permission == LocationPermission.deniedForever) {
@@ -281,9 +279,8 @@ class HomeController extends SuperController  {
           "ERROR",
           "Please grant location permission first from app settings",
           'Open Settings',
-          ErrorHandling.LOCATION_SETTING_ACTION);
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+          ErrorHandling.locationSettingAction);
+      return;
     }
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
@@ -324,7 +321,7 @@ class HomeController extends SuperController  {
     } else if (Platform.isIOS) {
       deviceOS = "IOS";
       var deviceInfoPlugin = await DeviceInfoPlugin().iosInfo;
-      deviceName =  deviceInfoPlugin.model.toString();
+      deviceName = deviceInfoPlugin.model.toString();
       oSVersion = deviceInfoPlugin.systemVersion.toString();
     }
     AppUtils.printMessage("deviceName  $deviceName");
@@ -336,7 +333,10 @@ class HomeController extends SuperController  {
     try {
       String? token = await NotificationRepository().getFirebaseToken();
       AppUtils.printMessage('Firebase Token=$token');
-      await NotificationRepository().postDeviceToken(userDetails.value?.userid,token,deviceOS, deviceName, oSVersion).then((value) {
+      await NotificationRepository()
+          .postDeviceToken(
+              userDetails.value?.userid, token, deviceOS, deviceName, oSVersion)
+          .then((value) {
         registerNotificationListener();
       });
     } catch (e) {
@@ -354,9 +354,11 @@ class HomeController extends SuperController  {
       provisional: false,
       sound: true,
     );
-    AppUtils.printMessage('Permission granted: ${settings.authorizationStatus}');
+    AppUtils.printMessage(
+        'Permission granted: ${settings.authorizationStatus}');
   }
-  void registerNotificationListener(){
+
+  void registerNotificationListener() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       NotificationManagers.showNotification(message);
     });

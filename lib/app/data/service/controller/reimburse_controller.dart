@@ -202,7 +202,7 @@ class ReimburseController extends SuperController {
         var js = jsonDecode(value);
         ReimburseRoot reimburseRoot = ReimburseRoot.fromJson(js);
         List<Reimburse?>? reimburse = reimburseRoot.data;
-        reimburseX.value = reimburse?.cast<Reimburse>();
+        reimburseX.value = (reimburse ?? []).whereType<Reimburse>().toList();
         getTableData(reimburseX.value);
         DialogHelper.dismissLoader();
       }, onError: (e) {

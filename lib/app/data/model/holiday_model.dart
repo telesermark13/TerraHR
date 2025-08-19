@@ -12,7 +12,14 @@ class Holiday {
   String? createdat;
   String? updatedat;
 
-  Holiday({this.id, this.holidaydate, this.holidayname, this.month, this.year, this.createdat, this.updatedat});
+  Holiday(
+      {this.id,
+      this.holidaydate,
+      this.holidayname,
+      this.month,
+      this.year,
+      this.createdat,
+      this.updatedat});
 
   Holiday.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -48,12 +55,9 @@ class HolidayRoot {
   HolidayRoot.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     statuscode = json['status_code'];
-    if (json['data'] != null) {
-      data = <Holiday>[];
-      json['data'].forEach((v) {
-        data!.add(Holiday.fromJson(v));
-      });
-    }
+    data = (json['data'] as List?)
+        ?.map((v) => Holiday.fromJson(v as Map<String, dynamic>))
+        .toList();
     message = json['message'];
   }
 
@@ -61,10 +65,8 @@ class HolidayRoot {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     data['status_code'] = statuscode;
-    data['data'] =data != null ? this.data!.map((v) => v?.toJson()).toList() : null;
+    data['data'] = this.data?.map((v) => v?.toJson()).toList();
     data['message'] = message;
     return data;
   }
 }
-
-

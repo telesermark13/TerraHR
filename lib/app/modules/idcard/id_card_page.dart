@@ -10,10 +10,12 @@ import '../../core/utils/storage_utils.dart';
 import '../../routes/routes.dart';
 
 class IDCARDPage extends StatelessWidget {
-   IDCARDPage({super.key});
-  IDCARDArguments? args;
+  const IDCARDPage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // read arguments locally to avoid a mutable field on a StatelessWidget
+    final IDCARDArguments? args = Get.arguments as IDCARDArguments?;
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
@@ -35,7 +37,7 @@ class IDCARDPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6.0, right: 6.0),
               child: TextButton(
                 onPressed: () {
-                  Get.toNamed(Routes.idCardPrintPdf, arguments: args );
+                  Get.toNamed(Routes.idCardPrintPdf, arguments: args);
                 },
                 child: const Text(
                   '🖨️ PRINT',
@@ -51,8 +53,9 @@ class IDCARDPage extends StatelessWidget {
         ),
         body: GetBuilder<IDCARDController>(builder: (controller) {
           try {
-             args = Get.arguments as IDCARDArguments;
-              controller.setIDCard(args!);
+            if (args != null) {
+              controller.setIDCard(args);
+            }
           } catch (e) {
             AppUtils.printMessage(e.toString());
           }
@@ -99,7 +102,8 @@ class IDCARDPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                          "${controller.idCardDetails.value?.firstName}" ??
+                                          controller.idCardDetails.value
+                                                  ?.firstName ??
                                               "",
                                           style: TextStyle(
                                               fontSize: Dimensions.font32,
@@ -109,7 +113,8 @@ class IDCARDPage extends StatelessWidget {
                                         width: Dimensions.height10,
                                       ),
                                       Text(
-                                          "${controller.idCardDetails.value?.lastName}" ??
+                                          controller.idCardDetails.value
+                                                  ?.lastName ??
                                               "",
                                           style: TextStyle(
                                               fontSize: Dimensions.font32,
@@ -127,7 +132,8 @@ class IDCARDPage extends StatelessWidget {
                                     left: 8.0, right: 8.0),
                                 child: FittedBox(
                                   child: Text(
-                                      "${controller.idCardDetails.value?.designation}" ??
+                                      controller.idCardDetails.value
+                                              ?.designation ??
                                           "",
                                       style: TextStyle(
                                           fontSize: Dimensions.font16,
@@ -179,7 +185,9 @@ class IDCARDPage extends StatelessWidget {
                                     width: Dimensions.height45,
                                   ),
                                   Text(
-                                      AppUtils.getStandardFormat(AppUtils.getReversedDate("08/02/1998")) ,
+                                      AppUtils.getStandardFormat(
+                                          AppUtils.getReversedDate(
+                                              "08/02/1998")),
                                       style: TextStyle(
                                           fontSize: Dimensions.font16,
                                           fontWeight: FontWeight.w500,
@@ -248,8 +256,7 @@ class IDCARDPage extends StatelessWidget {
                                     width: Dimensions.height45,
                                   ),
                                   Text(
-                                      controller.idCardDetails.value
-                                          ?.phone ??
+                                      controller.idCardDetails.value?.phone ??
                                           "NA",
                                       style: TextStyle(
                                           fontSize: Dimensions.font16,

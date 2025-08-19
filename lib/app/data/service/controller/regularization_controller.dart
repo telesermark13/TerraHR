@@ -79,7 +79,8 @@ class RegularizationController extends SuperController {
         var js = jsonDecode(value);
         RegularizationRoot regularizationRoot = RegularizationRoot.fromJson(js);
         List<Regularization?>? regularization = regularizationRoot.data;
-        regularizationX.value = regularization?.cast<Regularization>();
+        regularizationX.value =
+            (regularization ?? []).whereType<Regularization>().toList();
         getTableData(regularizationX.value);
         DialogHelper.dismissLoader();
       }, onError: (e) {

@@ -76,6 +76,7 @@ class Reimburse {
     data['label'] = label;
     data['created_at'] = createdat;
     data['updated_at'] = updatedat;
+    // removed invalid "this.data" access (Reimburse has no data field)
     return data;
   }
 }
@@ -91,12 +92,9 @@ class ReimburseRoot {
   ReimburseRoot.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     statuscode = json['status_code'];
-    if (json['data'] != null) {
-      data = <Reimburse>[];
-      json['data'].forEach((v) {
-        data!.add(Reimburse.fromJson(v));
-      });
-    }
+    data = (json['data'] as List?)
+        ?.map((v) => Reimburse.fromJson(v as Map<String, dynamic>))
+        .toList();
     message = json['message'];
   }
 
@@ -104,8 +102,7 @@ class ReimburseRoot {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     data['status_code'] = statuscode;
-    data['data'] =
-        data != null ? this.data!.map((v) => v?.toJson()).toList() : null;
+    data['data'] = this.data?.map((v) => v?.toJson()).toList();
     data['message'] = message;
     return data;
   }

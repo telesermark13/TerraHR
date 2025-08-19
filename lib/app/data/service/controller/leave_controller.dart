@@ -129,7 +129,7 @@ class LeaveController extends SuperController {
         var js = jsonDecode(value);
         LeaveStatusRoot leaveRoot = LeaveStatusRoot.fromJson(js);
         List<LeaveStatus?>? leaveStatus = leaveRoot.data;
-        leaveStatusData(leaveStatus?.cast<LeaveStatus>());
+        leaveStatusData((leaveStatus ?? []).whereType<LeaveStatus>().toList());
         getTableData(leaveStatusData.value);
         DialogHelper.dismissLoader();
         update();

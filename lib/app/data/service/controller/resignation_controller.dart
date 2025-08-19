@@ -87,7 +87,8 @@ class ResignationController extends SuperController {
         var js = jsonDecode(value);
         ResignationRoot resignationRoot = ResignationRoot.fromJson(js);
         List<Resignation?>? resignations = resignationRoot.data;
-        resignationX.value = resignations?.cast<Resignation>();
+        resignationX.value =
+            (resignations ?? []).whereType<Resignation>().toList();
         getTableData(resignationX.value);
         DialogHelper.dismissLoader();
       }, onError: (e) {

@@ -4,19 +4,20 @@ import '../core/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
   final String text;
-  Color? color;
+  final Color? color;
   final double size;
   final TextOverflow overflow;
-  TextAlign textAlign;
+  final TextAlign textAlign;
   final int maxLines;
 
-  BigText(
+  const BigText(
       {super.key,
       required this.text,
       this.color = const Color(0xFF332d2b),
       this.size = 0,
       this.overflow = TextOverflow.ellipsis,
-      this.textAlign = TextAlign.center, this.maxLines = 3});
+      this.textAlign = TextAlign.center,
+      this.maxLines = 3});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:employee_attendance_flutter/app/data/service/repository/notification_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -30,11 +28,11 @@ class NotificationController extends GetxController with StateMixin<dynamic> {
     try {
       DialogHelper.showLoading();
       NotificationRepository().getNotifications().then((value) {
-        var js = jsonDecode(value);
-      /*  LeaveStatusRoot leaveRoot = LeaveStatusRoot.fromJson(js);
-        List<LeaveStatus?>? leaveStatus = leaveRoot.data;
-        leaveStatusData(leaveStatus?.cast<LeaveStatus>());
-        getTableData(leaveStatusData.value);*/
+        // response payload intentionally ignored here; parse if needed
+        /*  LeaveStatusRoot leaveRoot = LeaveStatusRoot.fromJson(js);
+           List<LeaveStatus?>? leaveStatus = leaveRoot.data;
+           leaveStatusData(leaveStatus?.cast<LeaveStatus>());
+           getTableData(leaveStatusData.value); */
         DialogHelper.dismissLoader();
         update();
       }, onError: (e) {

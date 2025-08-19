@@ -56,7 +56,7 @@ class LikeUsWidget extends StatelessWidget {
     );
   }
 
-  _socialIcons(String imagePath, String url){
+  GestureDetector _socialIcons(String imagePath, String url){
     return GestureDetector(
       onTap:(){
         _launchUrl(url);

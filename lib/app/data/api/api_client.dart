@@ -9,7 +9,6 @@ import 'package:http_parser/http_parser.dart';
 import '../../core/utils/storage_utils.dart';
 import 'app_exception.dart';
 
-
 class ApiClient {
   ApiClient._();
 
@@ -17,16 +16,18 @@ class ApiClient {
 
   static ApiClient get client => _client;
 
-  Map<String,String> get _headers => {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    if(StorageUtils.instance.isLoggedIn()) "Authorization": "Bearer ${StorageUtils.instance.getToken()}",
-    "Cache-Control": "no-cache",
-    if(!StorageUtils.instance.isLoggedIn())"authkey":'xqibzknznwb29de15s44'
-  };
+  Map<String, String> get _headers => {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        if (StorageUtils.instance.isLoggedIn())
+          "Authorization": "Bearer ${StorageUtils.instance.getToken()}",
+        "Cache-Control": "no-cache",
+        if (!StorageUtils.instance.isLoggedIn())
+          "authkey": 'xqibzknznwb29de15s44'
+      };
 
   Future<dynamic> getApi(String url) async {
-    var responseJson;
+    dynamic responseJson;
     try {
       final response = await get(Uri.parse(url), headers: _headers);
       responseJson = _returnResponse(response);
@@ -37,12 +38,13 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> getQueryApi(String url,{required Map<String,String> query}) async {
-    var responseJson;
+  Future<dynamic> getQueryApi(String url,
+      {required Map<String, String> query}) async {
+    dynamic responseJson;
     try {
-      Uri uri = Uri(queryParameters: query,path: url);
+      Uri uri = Uri(queryParameters: query, path: url);
 
-      String finalUrl  = Uri.decodeComponent(uri.toString());
+      String finalUrl = Uri.decodeComponent(uri.toString());
 
       final response = await get(Uri.parse(finalUrl), headers: _headers);
 
@@ -54,11 +56,12 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> postAPi(String url,{required Map<String,dynamic> body}) async {
-    var responseJson;
+  Future<dynamic> postAPi(String url,
+      {required Map<String, dynamic> body}) async {
+    dynamic responseJson;
     try {
-
-      final response = await post(Uri.parse(url),body: jsonEncode(body), headers: _headers);
+      final response =
+          await post(Uri.parse(url), body: jsonEncode(body), headers: _headers);
 
       responseJson = _returnResponse(response);
     } catch (e) {
@@ -68,11 +71,12 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> putApi(String url,{required Map<String,String> body}) async {
-    var responseJson;
+  Future<dynamic> putApi(String url,
+      {required Map<String, String> body}) async {
+    dynamic responseJson;
     try {
-
-      final response = await put(Uri.parse(url),body: jsonEncode(body), headers: _headers);
+      final response =
+          await put(Uri.parse(url), body: jsonEncode(body), headers: _headers);
 
       responseJson = _returnResponse(response);
     } catch (e) {
@@ -82,11 +86,11 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> deleteApi(String url,{Map<String,String>? body}) async {
-    var responseJson;
+  Future<dynamic> deleteApi(String url, {Map<String, String>? body}) async {
+    dynamic responseJson;
     try {
-
-      final response = await delete(Uri.parse(url),body:body==null?null:jsonEncode(body), headers: _headers);
+      final response = await delete(Uri.parse(url),
+          body: body == null ? null : jsonEncode(body), headers: _headers);
 
       responseJson = _returnResponse(response);
     } catch (e) {
@@ -96,15 +100,17 @@ class ApiClient {
     return responseJson;
   }
 
-  Future<dynamic> uploadPictureAPI(File imageFile, String url, String id) async {
+  Future<dynamic> uploadPictureAPI(
+      File imageFile, String url, String id) async {
     try {
       var request = MultipartRequest("POST", Uri.parse(url));
       request.headers.addAll(_headers);
       request.fields["userid"] = id;
       request.fields["_method"] = "PUT";
       //create multipart using filepath, string or bytes
-      var pic = await MultipartFile.fromPath('src',  imageFile.path, contentType:  MediaType('image', 'jpeg'));
-     // var pic = await MultipartFile.fromPath("src", imageFile.path);
+      var pic = await MultipartFile.fromPath('src', imageFile.path,
+          contentType: MediaType('image', 'jpeg'));
+      // var pic = await MultipartFile.fromPath("src", imageFile.path);
       //add multipart to request
       request.files.add(pic);
       debugPrint("Upload request :$request");
@@ -113,6 +119,7 @@ class ApiClient {
       var responseData = await response.stream.toBytes();
       var responseString = String.fromCharCodes(responseData);
       debugPrint(responseString);
+      return responseString;
     } catch (e) {
       debugPrint(e.toString());
       return Future.error(e);
@@ -128,7 +135,7 @@ class ApiClient {
       request.fields["userid"] = data['userid'].toString();
       request.fields["expense_date"] = data['expense_date'].toString();
       request.fields["total_amt"] = data['total_amt'].toString();
-      request.fields["email"] = data['email'.toString()];
+      request.fields["email"] = data['email'].toString();
       request.fields["upi_id"] = data['upi_id'].toString();
       debugPrint("Upload request : String data added");
       //create multipart using filepath, string or bytes
@@ -141,8 +148,7 @@ class ApiClient {
         request.files.add(MultipartFile.fromString('descItem[]', descItem[i]));
         request.files.add(MultipartFile.fromString('rateUnit[]', rateUnit[i]));
         request.files.add(MultipartFile.fromString('quantity[]', quantity[i]));
-        request.files
-            .add(MultipartFile.fromString('total_sum[]', totalSum[i]));
+        request.files.add(MultipartFile.fromString('total_sum[]', totalSum[i]));
       }
       debugPrint("Upload request : List data added");
 
@@ -160,6 +166,7 @@ class ApiClient {
       var responseString = String.fromCharCodes(responseData);
       debugPrint("Printing response");
       debugPrint(responseString);
+      return responseString;
     } catch (e) {
       debugPrint(e.toString());
       return Future.error(e);

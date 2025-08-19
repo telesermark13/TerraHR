@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DialogHelper {
-
   static void showLoading() async {
     dismissLoader();
     Get.closeAllSnackbars();
     Get.dialog(
-      WillPopScope(
+      PopScope(
+        canPop: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,9 +29,6 @@ class DialogHelper {
             )
           ],
         ),
-        onWillPop: () async {
-          return false;
-        },
       ),
       barrierDismissible: false,
     );
@@ -40,9 +36,8 @@ class DialogHelper {
 
   static void dismissLoader() async {
     bool? isOpen = Get.isDialogOpen;
-    if (isOpen!) {
+    if (isOpen == true) {
       Get.back();
     }
   }
-
 }
