@@ -10,17 +10,21 @@ plugins {
 
 android {
     namespace = "com.example.employee_attendance_flutter"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = "27.0.12077973"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-        // Enable core library desugaring
-        coreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    // Enable core library desugaring for flutter_local_notifications
+    // This is a workaround for a potential issue with the plugin's build configuration
+    configure<com.android.build.gradle.internal.dsl.BaseAppModuleExtension> {
+        compileOptions.isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
@@ -28,7 +32,7 @@ android {
         applicationId = "com.example.employee_attendance_flutter"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -48,5 +52,5 @@ flutter {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4") // Use the latest version if needed
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4") 
 }
