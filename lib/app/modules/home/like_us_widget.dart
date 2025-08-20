@@ -34,22 +34,22 @@ class LikeUsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
-            _socialIcons("assets/images/tw.png", "https://twitter.com/tysindia"),
+            _socialIcons("assets/images/tw.png", "https://twitter.com/TerraHR"),
             SizedBox(
               width: Dimensions.height10,
             ),
 
-            _socialIcons("assets/images/f.png", "https://www.facebook.com/tysindia"),
+            _socialIcons("assets/images/f.png", "https://www.facebook.com/TerraHR"),
             SizedBox(
               width: Dimensions.height10,
             ),
 
-            _socialIcons("assets/images/ins.png", "https://www.instagram.com/tysindia/"),
+            _socialIcons("assets/images/ins.png", "https://www.instagram.com/TerraHR/"),
             SizedBox(
               width: Dimensions.height10,
             ),
 
-            _socialIcons("assets/images/lind.png", "https://www.linkedin.com/company/theyellowstrawberry")
+            _socialIcons("assets/images/lind.png", "https://www.linkedin.com/company/TerraHR")
           ],
         ),
       ],

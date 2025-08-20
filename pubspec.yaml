@@ -100,6 +100,7 @@ dependencies:
   pdf: ^3.9.0
   printing: ^5.10.1
   file_picker: ^10.3.1
+  cloud_firestore: ^6.0.0
   firebase_core: ^4.0.0
   firebase_messaging: ^16.0.0
   flutter_local_notifications: ^19.4.0
@@ -107,6 +108,7 @@ dependencies:
   path: ^1.8.3
 
   http_parser: ^4.0.0
+  firebase_auth: ^6.0.1
 
 dev_dependencies:
   flutter_test:

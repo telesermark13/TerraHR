@@ -23,7 +23,7 @@ Resignation, Reimbursement and ID-Card.
 - Audio players
 - PDF Printer
 
-Google Play Store link: https://play.google.com/store/apps/details?id=com.tys.eattendanceapp
+Google Play Store link: https://play.google.com/store/apps/details?id=TerraHR.eattendanceapp
 
 
 

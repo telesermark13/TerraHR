@@ -31,9 +31,11 @@ class User {
 
   User({this.token, this.name});
 
-  User.fromJson(Map<String, dynamic> json) {
-    token = json['token'];
-    name = json['name'];
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User( // Return a new User instance
+      token: json['token'] as String?,
+      name: json['name'] as String?,
+    );
   }
 
   Map<String, dynamic> toJson() {

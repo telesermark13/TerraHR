@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968710947861",
+    "project_id": "terrahr",
+    "storage_bucket": "terrahr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968710947861:android:5427c2aa0d140fc87d7a1c",
+        "android_client_info": {
+          "package_name": "com.example.employee_attendance_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3Ld1QAwR9_Zz51xbPMkkJj-H4AGh5k78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

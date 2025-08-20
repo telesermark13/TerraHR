@@ -9,8 +9,8 @@ class NotificationManagers {
       FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'com.tys.notification', // id
-    'TYS Attendance Notifications', // title
+    'TerraHR.notification', // id
+    'TerraHR Attendance Notifications', // title
     description: 'This channel is used for Attendance related notifications.',
     importance: Importance.max,
   );
